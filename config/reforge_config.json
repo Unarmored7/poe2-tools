@@ -1,0 +1,14 @@
+{
+    "orb_pos": "(?, ?)",
+    "equip_pos": "(?, ?)",
+    "mod_region": "(?, ?, ?, ?)",
+    "main_threshold": 0.85,
+    "tier_threshold": 0.9,
+    "max_attempts": 200,
+    "orb_delay": 0.25,
+    "equip_click_delay": 0.75,
+    "alt_screenshot_delay": 0.0,
+    "loop_random_max": 0.02,
+    "main_template_paths": [],
+    "tier_template_path": null
+}

@@ -1,0 +1,15 @@
+{
+    "hp_region": null,
+    "mp_region": null,
+    "hp_key": "1",
+    "hp_threshold": 35.0,
+    "disable_hp": false,
+    "enable_hp_timer": false,
+    "hp_timer_interval": 5.0,
+    "mp_key": "2",
+    "mp_threshold": 35.0,
+    "disable_mp": false,
+    "enable_mp_timer": false,
+    "mp_timer_interval": 8.0,
+    "check_interval": 0.3
+}
