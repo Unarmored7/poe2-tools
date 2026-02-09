@@ -6,6 +6,28 @@
 
 import cv2
 import numpy as np
+from typing import Optional
+
+
+def imread_unicode(path: str, flags: int = cv2.IMREAD_COLOR) -> Optional[np.ndarray]:
+    """
+    读取图像文件，支持中文路径
+    
+    OpenCV 的 cv2.imread 不支持中文路径，此函数使用 numpy 读取字节后解码。
+    
+    Args:
+        path: 图像文件路径（支持中文）
+        flags: OpenCV 读取标志，默认 cv2.IMREAD_COLOR
+        
+    Returns:
+        图像数组，失败时返回 None
+    """
+    try:
+        with open(path, 'rb') as f:
+            data = np.frombuffer(f.read(), dtype=np.uint8)
+        return cv2.imdecode(data, flags)
+    except Exception:
+        return None
 
 
 def preprocess_image(img: np.ndarray) -> np.ndarray:
@@ -162,7 +184,7 @@ def load_and_preprocess_template(path: str) -> np.ndarray:
     加载并预处理模板图像
     
     Args:
-        path: 模板图像路径
+        path: 模板图像路径（支持中文）
         
     Returns:
         预处理后的模板图像
@@ -170,7 +192,7 @@ def load_and_preprocess_template(path: str) -> np.ndarray:
     Raises:
         ValueError: 无法加载模板
     """
-    template = cv2.imread(path, cv2.IMREAD_COLOR)
+    template = imread_unicode(path, cv2.IMREAD_COLOR)
     if template is None:
         raise ValueError(f"无法加载模板: {path}")
     return preprocess_image(template)

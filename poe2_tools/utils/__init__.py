@@ -10,6 +10,8 @@ from poe2_tools.utils.image_processing import (
     calculate_mp_percentage,
     is_valid_hp_bar,
     is_valid_mp_bar,
+    load_and_preprocess_template,
+    imread_unicode,
 )
 from poe2_tools.utils.region_selector import RegionSelector, CoordinatePicker
 from poe2_tools.utils.config_manager import ConfigManager

@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image, ImageTk
 import os
 
-from poe2_tools.utils.image_processing import preprocess_image
+from poe2_tools.utils.image_processing import preprocess_image, imread_unicode
 
 
 class TemplateMatcher:
@@ -130,7 +130,7 @@ class TemplateMatcher:
         path = filedialog.askopenfilename(filetypes=[("Image", "*.png;*.jpg;*.bmp")])
         if path:
             self.screenshot_path = path
-            self.screenshot_img = cv2.imread(path, cv2.IMREAD_COLOR)
+            self.screenshot_img = imread_unicode(path, cv2.IMREAD_COLOR)
             self._update_original_views()
             self.log(f"✅ 已加载截图: {os.path.basename(path)}")
 
@@ -139,7 +139,7 @@ class TemplateMatcher:
         path = filedialog.askopenfilename(filetypes=[("PNG", "*.png")])
         if path:
             self.template_main_path = path
-            self.template_main_img = cv2.imread(path, cv2.IMREAD_COLOR)
+            self.template_main_img = imread_unicode(path, cv2.IMREAD_COLOR)
             self._update_original_views()
             self.log(f"✅ 已加载主词条模板: {os.path.basename(path)}")
 
@@ -148,7 +148,7 @@ class TemplateMatcher:
         path = filedialog.askopenfilename(filetypes=[("PNG", "*.png")])
         if path:
             self.template_tier_path = path
-            self.template_tier_img = cv2.imread(path, cv2.IMREAD_COLOR)
+            self.template_tier_img = imread_unicode(path, cv2.IMREAD_COLOR)
             self._update_original_views()
             self.log(f"✅ 已加载T阶模板: {os.path.basename(path)}")
 
