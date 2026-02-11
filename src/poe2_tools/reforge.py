@@ -10,6 +10,7 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import time
 import threading
+import random
 import pyautogui
 import pyperclip
 
@@ -36,6 +37,16 @@ CONFIG_TOP_HEIGHT = (
     + 10
     + CONFIG_CONTROLS_ROW_HEIGHT
 )
+
+
+def _jitter_delay(base_seconds: float, ratio: float = 0.10) -> float:
+    """Return delay with +/-ratio random jitter for human-like cadence."""
+    base = max(0.0, float(base_seconds))
+    if base <= 0:
+        return 0.0
+    low = max(0.0, base * (1.0 - ratio))
+    high = base * (1.0 + ratio)
+    return random.uniform(low, high)
 
 
 class AffixBlockInput:
@@ -526,6 +537,7 @@ class ReforgeManager:
 
         success = False
         attempt = 0
+        next_extra_pause_at = random.randint(90, 110)
         stop_reason = "未命中结束"
         last_result = None
         self._is_running = True
@@ -544,14 +556,20 @@ class ReforgeManager:
                 # 点击装备
                 pyautogui.moveTo(equip_x, equip_y, duration=0.03)
                 pyautogui.click()
-                time.sleep(equip_click_delay_s)
+                time.sleep(_jitter_delay(equip_click_delay_s, ratio=0.10))
+
+                if attempt >= next_extra_pause_at and equip_click_delay_s > 0:
+                    extra_pause = equip_click_delay_s * 10.0
+                    self.log(f"第 {attempt} 次：插入额外停顿 {extra_pause:.2f}s", "debug")
+                    time.sleep(extra_pause)
+                    next_extra_pause_at += random.randint(90, 110)
 
                 # Alt+Ctrl+C 复制装备信息（统一使用完整词条信息）
                 pyperclip.copy("")
                 pyautogui.keyDown("alt")
-                time.sleep(0.02)
+                time.sleep(_jitter_delay(0.02, ratio=0.35))
                 pyautogui.hotkey("ctrl", "c")
-                time.sleep(0.01)
+                time.sleep(_jitter_delay(0.01, ratio=0.35))
                 pyautogui.keyUp("alt")
 
                 # 等待剪贴板数据
@@ -562,7 +580,7 @@ class ReforgeManager:
                     data = pyperclip.paste()
                     if data:
                         break
-                    time.sleep(0.01)
+                    time.sleep(_jitter_delay(0.01, ratio=0.35))
 
                 if not data:
                     if attempt % 20 == 0:
@@ -938,6 +956,7 @@ class DivineReforgeManager:
 
         success = False
         attempt = 0
+        next_extra_pause_at = random.randint(90, 110)
         stop_reason = "未命中结束"
         last_result = None
         self._is_running = True
@@ -961,13 +980,19 @@ class DivineReforgeManager:
                 attempt += 1
                 pyautogui.moveTo(equip_x, equip_y, duration=0.03)
                 pyautogui.click()
-                time.sleep(equip_click_delay_s)
+                time.sleep(_jitter_delay(equip_click_delay_s, ratio=0.10))
+
+                if attempt >= next_extra_pause_at and equip_click_delay_s > 0:
+                    extra_pause = equip_click_delay_s * 10.0
+                    self.log(f"第 {attempt} 次：插入额外停顿 {extra_pause:.2f}s", "debug")
+                    time.sleep(extra_pause)
+                    next_extra_pause_at += random.randint(90, 110)
 
                 pyperclip.copy("")
                 pyautogui.keyDown("alt")
-                time.sleep(0.02)
+                time.sleep(_jitter_delay(0.02, ratio=0.35))
                 pyautogui.hotkey("ctrl", "c")
-                time.sleep(0.01)
+                time.sleep(_jitter_delay(0.01, ratio=0.35))
                 pyautogui.keyUp("alt")
 
                 data = ""
@@ -977,7 +1002,7 @@ class DivineReforgeManager:
                     data = pyperclip.paste()
                     if data:
                         break
-                    time.sleep(0.01)
+                    time.sleep(_jitter_delay(0.01, ratio=0.35))
 
                 if not data:
                     if attempt % 20 == 0:
