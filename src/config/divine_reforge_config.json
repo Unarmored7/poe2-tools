@@ -1,0 +1,9 @@
+{
+    "orb_pos": "(371, 259)",
+    "equip_pos": "(1336, 599)",
+    "fractured_threshold_percent": 80,
+    "target_mode": "selected",
+    "selected_requirements_text": "",
+    "selected_requirement_blocks": [],
+    "equip_click_delay_ms": 100
+}

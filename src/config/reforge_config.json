@@ -1,0 +1,10 @@
+{
+    "min_match_count": 1,
+    "mod_requirements_text": "增加 (35—39)%暴擊傷害加成",
+    "mod_requirement_blocks": [
+        "增加 (35—39)%暴擊傷害加成"
+    ],
+    "orb_pos": "(58, 441)",
+    "equip_pos": "(1343, 597)",
+    "equip_click_delay_ms": 80
+}

@@ -1,0 +1,38 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+*.iml
+
+# Runtime config and local artifacts
+config/*.json
+
+# Build artifacts
+build/
+dist/
+dist_hardened/
+dist_hardened_debug/
+release/
+*.spec
+*.pdb
+debug_output.txt
+
+# Local references / diagnostics
+diag/
+reference/
+
+# Debug artifacts
+output_raw.txt
+debug_*.png
+
+# OS
+.DS_Store
+Thumbs.db

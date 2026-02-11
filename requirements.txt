@@ -8,3 +8,6 @@ keyboard>=0.13.5
 
 # Optional: AI-powered equipment inspection
 dashscope>=1.14.0
+
+# UI
+ttkbootstrap>=1.1.0

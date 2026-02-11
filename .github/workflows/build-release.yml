@@ -1,0 +1,47 @@
+name: Build And Release EXE
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build EXE
+        shell: cmd
+        run: |
+          pyinstaller --noconsole --onefile --name=POE2-Tools --clean --paths=src --distpath=dist --workpath=build "--add-data=assets\*;assets" --icon=assets\favicon.ico main.py
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: POE2-Tools-windows
+          path: dist/POE2-Tools.exe
+
+      - name: Publish to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/POE2-Tools.exe
+          generate_release_notes: true

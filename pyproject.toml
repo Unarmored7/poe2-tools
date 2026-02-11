@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poe2-tools"
+version = "1.0.0"
+description = "Path of Exile 2 automation utilities"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "poe2-tools contributors" }]
+dependencies = [
+    "opencv-python>=4.8.0",
+    "numpy>=1.24.0",
+    "pyautogui>=0.9.54",
+    "pillow>=10.0.0",
+    "pynput>=1.7.6",
+    "keyboard>=0.13.5",
+    "dashscope>=1.14.0",
+]
+
+[project.scripts]
+poe2-tools = "poe2_tools.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

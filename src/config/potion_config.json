@@ -1,0 +1,22 @@
+{
+    "hp_region": [
+        757,
+        223,
+        310,
+        160
+    ],
+    "mp_region": [
+        661,
+        252,
+        280,
+        198
+    ],
+    "hp_key": "1",
+    "hp_threshold": 30,
+    "disable_hp": false,
+    "mp_key": "2",
+    "mp_threshold": 35,
+    "disable_mp": false,
+    "timed_potion_interval": "",
+    "check_interval": 1
+}
