@@ -21,6 +21,7 @@ dist/
 dist_hardened/
 dist_hardened_debug/
 release/
+*.exe
 *.spec
 *.pdb
 debug_output.txt
