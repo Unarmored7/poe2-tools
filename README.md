@@ -16,25 +16,28 @@ Path of Exile 2 辅助工具集（Python + Tkinter）。
 
 - Python `3.10+`
 - Windows（鼠标/键盘自动操作逻辑按 Windows 使用习惯实现）
+- 游戏以固定分辨率或窗口布局运行，便于校准屏幕区域和点击坐标
 
 ## 安装
 
-```bash
-pip install -r requirements.txt
-pip install -e .
+```powershell
+python -m pip install -r requirements.txt
+python -m pip install -e .
 ```
 
 ## 启动
 
-```bash
+```powershell
 python main.py
 ```
 
 或：
 
-```bash
+```powershell
 python -m poe2_tools
 ```
+
+请从项目根目录启动。首次运行先在界面中设置检测区域和点击坐标；当前源码的配置管理器将运行配置读写到 `src/config/`。AI 装备检查功能需要 DashScope API Key，可在 PowerShell 会话中设置 `$env:DASHSCOPE_API_KEY = "你的密钥"` 后启动；其他功能不依赖该密钥。
 
 ## 使用说明
 
